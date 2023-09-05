@@ -1,11 +1,25 @@
 from rest_framework import serializers
-from todo.models import  Users, Tasks
+from todo.models import Users, Tasks, ListTasks, ListOtdels
+
+
+class ListOtdelsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ListOtdels
+        fields = "__all__"
+
+
+class ListTasksSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ListTasks
+        fields = "__all__"
+
 
 class TasksSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tasks
-        fields = "__all__"    
-    
+        fields = "__all__"
+
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users

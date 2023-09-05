@@ -21,9 +21,11 @@ from rest_framework import routers
 router = routers.DefaultRouter()
 router.register(r'tasks', views.TasksView, 'task')
 router.register(r'users', views.UserView, 'user')
+router.register(r'lstasks', views.ListTasksView, 'lstask')
+router.register(r'lstotdels', views.ListOtdelsView, 'otdel')
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
+    path('', include(router.urls)),
 ]

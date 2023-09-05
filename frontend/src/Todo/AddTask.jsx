@@ -33,7 +33,7 @@ function AddTask() {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" type="submit">
             Add Task
           </Button>
         </Modal.Footer>

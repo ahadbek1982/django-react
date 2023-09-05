@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "react-widgets/styles.css";
 import ClassCounter from "./components/ClassCounter";
 import HookCounter from "./components/HookCounter";
 import HookCounter2 from "./components/HookCounter2";
@@ -18,10 +19,11 @@ import UseContext from "./components/UseContext";
 import ComponentE from "./components/ComponentE";
 import UseReduce from "./components/UseReduce";
 import UseReduce2 from "./components/UseReduce2";
-import First from "./Todo/first";
+
 import Index from "./Todo/Index";
 import DynamicTable from "./components/DynamicTable";
 import Parent from "./components/Parent";
+import Header from "./Todo/Header";
 
 export const UserContext = React.createContext();
 export const ChannelContext = React.createContext();
@@ -50,7 +52,9 @@ function App() {
       {/* <UseReduce/> */}
       {/* <First/> */}
       {/* <UseReduce2/> */}
+
       <Index />
+
       {/* <DynamicTable/> */}
       {/* <Parent /> */}
     </div>

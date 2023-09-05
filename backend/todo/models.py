@@ -1,6 +1,19 @@
 from django.db import models
 
 
+class ListOtdels(models.Model):
+    otdel_name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.otdel_name
+
+
+class ListTasks(models.Model):
+    task_name = models.CharField(max_length=120)
+
+    def __str__(self):
+        return self.task_name
+
 
 class Users(models.Model):
     username = models.CharField(unique=True, max_length=30)
@@ -10,6 +23,7 @@ class Users(models.Model):
 
     def __str__(self):
         return self.username
+
 
 class Tasks(models.Model):
     sana = models.DateField()
@@ -23,10 +37,6 @@ class Tasks(models.Model):
 
     def __str__(self):
         return self.topshiriq_nomer
-    
+
     class Meta:
-        ordering= ['sana']
-
-    
-
-
+        ordering = ['sana']

@@ -15,6 +15,7 @@ import { Link, useNavigate } from "react-router-dom";
 import UserPage from "./UserPage";
 export const UserContext = React.createContext();
 export const ChannelContext = React.createContext();
+
 function Home() {
   const [show, setShow] = useState(false);
   const [show2, setShow2] = useState(false);
@@ -46,7 +47,7 @@ function Home() {
     event.preventDefault();
 
     axios
-      .get("http://127.0.0.1:8000/api/users/")
+      .get("http://127.0.0.1:8000/users/")
       .then((res) => setlsuser(res.data));
 
     const lsusers = lsuser.map((user) => user.username);
@@ -61,7 +62,7 @@ function Home() {
     } else {
       // window.alert('ok')
       axios
-        .post("http://127.0.0.1:8000/api/users/", users)
+        .post("http://127.0.0.1:8000/users/", users)
         .then((res) => {
           console.log(res);
           handleClose();
@@ -113,7 +114,7 @@ function Home() {
     // console.log(register.username)
     event.preventDefault();
     axios
-      .get("http://127.0.0.1:8000/api/users/")
+      .get("http://127.0.0.1:8000/users/")
 
       .then((res) => {
         setUsers(res.data);
