@@ -17,7 +17,8 @@ class ListTasksSerializer(serializers.ModelSerializer):
 class TasksSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tasks
-        fields = "__all__"
+        fields = ('id', 'sana', 'javobgar', 'topshiriq_turi', 'topshiriq_nomer',
+                  'topshiriq_sana', 'topshiriq_otdel', 'topshiriq_mavzu', 'topshiriq_muddat')
 
 
 class UserSerializer(serializers.ModelSerializer):

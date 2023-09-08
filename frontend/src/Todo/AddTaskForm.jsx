@@ -5,27 +5,41 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useParams } from "react";
 import DatePicker from "react-datepicker";
 import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 import { URL } from "./Url_task";
 import { useNavigate } from "react-router-dom";
-import DropdownList from "react-widgets/DropdownList";
+// import { v4 as uuidv4 } from "uuid";
 import ListTasks from "./ListTasks";
 import ListUsers from "./ListUsers";
 import ListOtdels from "./ListOtdels";
 
-export function AddTaskForm() {
+export function AddTaskForm(props) {
   const navigate = useNavigate();
-  const [startDate, setStartDate] = useState(new Date());
+  // const { id } = useParams();
   const [users, setusers] = useState([]);
   useEffect(() => {
     axios.get("http://127.0.0.1:8000/users/").then((res) => setusers(res.data));
   }, []);
-  const lsuser = users.map((e) => e.username);
 
-  const [data, setdata] = useState({
+  const lsuser = users.map((e) => e.username);
+  // to get max id
+  const [tasks, settasks] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://127.0.0.1:8000/tasks/").then((res) => {
+      const ids = res.data.map((e) => e.id);
+      settasks(ids);
+      // console.log(tasks);
+    });
+  }, []);
+  const lsids = Math.max(...tasks);
+  let test = lsids + 1;
+
+  const [value, setdata] = useState({
+    id: "",
     sana: "",
     javobgar: "",
     topshiriq_turi: "",
@@ -35,22 +49,37 @@ export function AddTaskForm() {
     topshiriq_mavzu: "",
     topshiriq_muddat: "",
   });
-  console.log(data);
+  // console.log(data);
 
   const handleChange = (e) => {
-    setdata({ ...data, [e.target.name]: e.target.value });
+    setdata({ ...value, [e.target.name]: e.target.value });
   };
-  const handleSubmit = (e) => {
+
+  function handleSubmit(e) {
     e.preventDefault();
-    axios.post(URL, data).then((res) => {
-      console.log(res.data);
+
+    axios.post("http://127.0.0.1:8000/tasks/", value).then((res) => {
+      console.log(res.value);
       navigate("/");
     });
-  };
+  }
+
   const [selected, setSelected] = useState(lsuser[0]);
+  const [date, setdate] = useState();
+
   return (
     <Card shadow={false}>
-      <form onSubmit={handleSubmit}>
+      <form id="addtask">
+        <input
+          type="text"
+          placeholder="id"
+          name="id"
+          // value={lsids}
+          onChange={handleChange}
+          style={{ width: "460px" }}
+        />
+        <br />
+        <br />
         <input
           type="date"
           placeholder="Sana"
@@ -113,6 +142,8 @@ export function AddTaskForm() {
           onChange={handleChange}
         />
         <br />
+        {/* <AddDate /> */}
+
         <input
           type="date"
           placeholder="Sana"
@@ -121,6 +152,12 @@ export function AddTaskForm() {
           onChange={handleChange}
         />
         <br />
+        <input
+          type="submit"
+          value="Submit"
+          form="addtask"
+          onClick={handleSubmit}
+        />
       </form>
     </Card>
   );
